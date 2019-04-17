@@ -34,6 +34,10 @@ func (m *ImageHandler) ServeAPIVersion(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Pong"))
 }
 
+func (m *ImageHandler) ServeEiriniVersion(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte(m.ImageManager.rootfsDigest))
+}
+
 func (m *ImageHandler) ServeManifest(w http.ResponseWriter, r *http.Request) {
 	// TODO (pego): this is a hack to address to quickly find out if this should serve a manifest or manifest list. Should be improved.
 	if m.ImageManager.GetBlob("not used", mux.Vars(r)["tag"]) != nil {
